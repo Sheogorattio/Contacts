@@ -1,0 +1,31 @@
+﻿<Window x:Class="PersonRegister.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonRegister"
+        mc:Ignorable="d"
+        Title="Записная книжка" Height="350" Width="500">
+
+    <Window.Resources>
+        <local:ContactsViewModel x:Key="ViewModel"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource ViewModel}">
+        <!-- UI для отображения и редактирования контактов -->
+        <ListView ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact}">
+        </ListView>
+
+        <!-- Кнопки и другие элементы управления для добавления, удаления, сохранения и загрузки -->
+        <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+            <Button Content="Добавить" Command="{Binding AddPerson}"/>
+            <Button Content="Удалить" Command="{Binding DeletePerson}"/>
+            <Button Content="Сохранить" Command="{Binding SaveContacts}"/>
+            <Button Content="Загрузить" Command="{Binding Load}"/>
+
+            <TextBox Name="NameBox" Text="{Binding CurrentName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Name="PhoneBox" Text="{Binding CurrentPhone, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Name="AddressBox" Text="{Binding CurrentAddress, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        </StackPanel>
+    </Grid>
+</Window>
